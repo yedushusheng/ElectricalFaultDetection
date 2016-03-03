@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/2D.png</file>
+        <file>images/3D.png</file>
+        <file>images/clear.png</file>
+        <file>images/exit.png</file>
+        <file>images/help.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/print.png</file>
+        <file>images/rotate.png</file>
+        <file>images/save.png</file>
+        <file>images/saveas.png</file>
+        <file>images/shear.png</file>
+        <file>images/spectrum.png</file>
+        <file>images/tool.png</file>
+        <file>images/userguid.png</file>
+        <file>images/wave.png</file>
+        <file>images/zoom-1.png</file>
+        <file>images/zoom-in.png</file>
+        <file>images/zoom-out.png</file>
+        <file>images/background.png</file>
+        <file>images/qt.png</file>
+        <file>images/Website.png</file>
+        <file>images/upload.png</file>
+        <file>images/chart.png</file>
+        <file>images/login.png</file>
+        <file>images/password.png</file>
+    </qresource>
+</RCC>

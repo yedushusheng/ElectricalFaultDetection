@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>668</width>
+    <height>364</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QCustomPlot" name="customPlot" native="true">
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>668</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_F">
+    <property name="title">
+     <string>文件(&amp;F)</string>
+    </property>
+    <addaction name="action_upload"/>
+    <addaction name="action_O"/>
+    <addaction name="action_A"/>
+    <addaction name="action_P"/>
+    <addaction name="action_Q"/>
+   </widget>
+   <widget class="QMenu" name="menu_E">
+    <property name="title">
+     <string>编辑(&amp;E)</string>
+    </property>
+    <addaction name="action_zoom_in"/>
+    <addaction name="action_zoom_out"/>
+    <addaction name="action_rotate"/>
+    <addaction name="action_clear"/>
+   </widget>
+   <widget class="QMenu" name="menu_V">
+    <property name="title">
+     <string>视图(&amp;V)</string>
+    </property>
+    <addaction name="action_wave"/>
+    <addaction name="action_spec"/>
+    <addaction name="action_2D"/>
+    <addaction name="action_3D"/>
+    <addaction name="action_result"/>
+   </widget>
+   <widget class="QMenu" name="menu_H">
+    <property name="title">
+     <string>帮助(&amp;H)</string>
+    </property>
+    <addaction name="action_about"/>
+    <addaction name="action_user"/>
+    <addaction name="action_Website"/>
+    <addaction name="action_Qt"/>
+   </widget>
+   <widget class="QMenu" name="menu_L">
+    <property name="title">
+     <string>登陆(&amp;L)</string>
+    </property>
+    <addaction name="action_login"/>
+    <addaction name="action_password"/>
+   </widget>
+   <addaction name="menu_L"/>
+   <addaction name="menu_F"/>
+   <addaction name="menu_E"/>
+   <addaction name="menu_V"/>
+   <addaction name="menu_H"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_login"/>
+   <addaction name="action_password"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="action_upload"/>
+   <addaction name="action_O"/>
+   <addaction name="action_P"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="action_zoom_in"/>
+   <addaction name="action_zoom_out"/>
+   <addaction name="action_rotate"/>
+   <addaction name="action_clear"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+   <addaction name="action_spec"/>
+   <addaction name="action_wave"/>
+   <addaction name="action_2D"/>
+   <addaction name="action_3D"/>
+   <addaction name="action_result"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_O">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/open.png</normaloff>:/new/prefix1/images/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>打开(&amp;O)</string>
+   </property>
+  </action>
+  <action name="action_A">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/saveas.png</normaloff>:/new/prefix1/images/saveas.png</iconset>
+   </property>
+   <property name="text">
+    <string>另存为(&amp;A)</string>
+   </property>
+  </action>
+  <action name="action_P">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/print.png</normaloff>:/new/prefix1/images/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>打印(&amp;P)</string>
+   </property>
+  </action>
+  <action name="action_Q">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/exit.png</normaloff>:/new/prefix1/images/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>退出(&amp;Q)</string>
+   </property>
+  </action>
+  <action name="action_zoom_in">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/zoom-in.png</normaloff>:/new/prefix1/images/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>放大</string>
+   </property>
+  </action>
+  <action name="action_zoom_out">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/zoom-out.png</normaloff>:/new/prefix1/images/zoom-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>缩小</string>
+   </property>
+  </action>
+  <action name="action_rotate">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/rotate.png</normaloff>:/new/prefix1/images/rotate.png</iconset>
+   </property>
+   <property name="text">
+    <string>还原</string>
+   </property>
+  </action>
+  <action name="action_clear">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/clear.png</normaloff>:/new/prefix1/images/clear.png</iconset>
+   </property>
+   <property name="text">
+    <string>清除</string>
+   </property>
+  </action>
+  <action name="action_wave">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/wave.png</normaloff>:/new/prefix1/images/wave.png</iconset>
+   </property>
+   <property name="text">
+    <string>波形图</string>
+   </property>
+  </action>
+  <action name="action_spec">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/spectrum.png</normaloff>:/new/prefix1/images/spectrum.png</iconset>
+   </property>
+   <property name="text">
+    <string>频谱图</string>
+   </property>
+  </action>
+  <action name="action_2D">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/2D.png</normaloff>:/new/prefix1/images/2D.png</iconset>
+   </property>
+   <property name="text">
+    <string>2D视图</string>
+   </property>
+  </action>
+  <action name="action_3D">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/3D.png</normaloff>:/new/prefix1/images/3D.png</iconset>
+   </property>
+   <property name="text">
+    <string>3D视图</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/help.png</normaloff>:/new/prefix1/images/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>关于软件</string>
+   </property>
+  </action>
+  <action name="action_user">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/userguid.png</normaloff>:/new/prefix1/images/userguid.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户手册</string>
+   </property>
+  </action>
+  <action name="action_Qt">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/qt.png</normaloff>:/new/prefix1/images/qt.png</iconset>
+   </property>
+   <property name="text">
+    <string>关于Qt</string>
+   </property>
+  </action>
+  <action name="action_Website">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/Website.png</normaloff>:/new/prefix1/images/Website.png</iconset>
+   </property>
+   <property name="text">
+    <string>关于网站</string>
+   </property>
+  </action>
+  <action name="action_upload">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/upload.png</normaloff>:/new/prefix1/images/upload.png</iconset>
+   </property>
+   <property name="text">
+    <string>上传数据</string>
+   </property>
+  </action>
+  <action name="action_result">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/chart.png</normaloff>:/new/prefix1/images/chart.png</iconset>
+   </property>
+   <property name="text">
+    <string>探伤结果</string>
+   </property>
+  </action>
+  <action name="action_login">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/login.png</normaloff>:/new/prefix1/images/login.png</iconset>
+   </property>
+   <property name="text">
+    <string>用户登陆</string>
+   </property>
+  </action>
+  <action name="action_password">
+   <property name="icon">
+    <iconset resource="menu.qrc">
+     <normaloff>:/new/prefix1/images/password.png</normaloff>:/new/prefix1/images/password.png</iconset>
+   </property>
+   <property name="text">
+    <string>修改密码</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="menu.qrc"/>
+ </resources>
+ <connections/>
+</ui>
