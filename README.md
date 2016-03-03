@@ -1,2 +1,2 @@
 # MetalDetector
-The project is based on Qt and can be used in MetalDetector!
+基于Qt的嵌入式瓷支柱绝缘子故障检测软件
