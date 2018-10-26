@@ -3,11 +3,12 @@
 #include <QDebug>
 
 /*****************************************************************
-����ԭ�ͣ�void FFT(double *RealArray,double *ImaArray,int n,int sign)
-�������ܣ�������ĸ���������ʵ�����鲿�����п��ٸ���Ҷ�任��FFT��
-���������RealArrayΪ��������ʵ����ImaArrayΪ���������鲿��
-         nΪ����Ҷ���������ȡ2���������ݣ�
-         signȡ1���и���Ҷ���㣬ȡ-1���з�����Ҷ�任
+函数原型：void FFT(double *RealArray,double *ImaArray,int n,int sign)
+函数功能：对输入的复数（包含实部和虚部）进行快速傅里叶变换（FFT）
+输入参数：RealArray为给定数据实部，ImaArray为给定数据虚部，
+         n为傅立叶计算点数，取2的整数次幂，
+         sign取1进行傅立叶计算，取-1进行反傅立叶变换
+函数说明：该算法为最基本的FFT运算，针对嵌入式效率较低，可以改进为较为快速的分裂基算法
 *****************************************************************/
 double FFT(double *RealArray,double *ImaArray,int n,int sign)
 {
