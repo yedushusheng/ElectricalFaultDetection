@@ -8,7 +8,7 @@ diagram::diagram(QWidget *parent) :
     ui(new Ui::diagram)
 {
     ui->setupUi(this);
-    setWindowTitle(QObject::tr("波形分析结果显示"));
+    setWindowTitle(QObject::tr("藳篓膼脦藝脰脦枚藵谩拧疟膸脭臉啪"));//澧炲姞涓枃瀛楃鏀寔
 }
 
 diagram::~diagram()
