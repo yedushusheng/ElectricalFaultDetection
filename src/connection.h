@@ -8,16 +8,16 @@
 
 static bool createConnection()
 {
-    //SqlDatabaseÎªÊµÏÖÊı¾İ¿âÁ¬½ÓµÄÀà
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","connection1");//´´½¨Ò»¸öÊı¾İ¿â£¬Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("analyse.db");//ÉèÖÃÊı¾İ¿âµÄÃû×Ö
+    //SqlDatabaseä¸ºå®ç°æ•°æ®åº“è¿æ¥çš„ç±»
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","connection1");//åˆ›å»ºä¸€ä¸ªæ•°æ®åº“ï¼Œæ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("analyse.db");//è®¾ç½®æ•°æ®åº“çš„åå­—
     if(! db.open())
     {
-        QMessageBox::critical(0,QObject::tr("ÎŞ·¨¼ÓÔØÊı¾İ¿â"),
-             QObject::tr("ÎŞ·¨½¨Á¢ÓĞĞ§µÄÊı¾İ¿âÁ¬½Ó"),QMessageBox::Cancel);
+        QMessageBox::critical(0,QObject::tr("æ— æ³•åŠ è½½æ•°æ®åº“"),
+             QObject::tr("æ— æ³•å»ºç«‹æœ‰æ•ˆçš„æ•°æ®åº“è¿æ¥"),QMessageBox::Cancel);
         return false;
     }
-    QSqlQuery query(db);//ĞÂ½¨Ò»¸ö²éÑ¯¿â
+    QSqlQuery query(db);//æ–°å»ºä¸€ä¸ªæŸ¥è¯¢åº“
     query.exec("create table result (id varchar primary key,percentage varchar(10),analyse varchar(20))");
     query.exec("insert into result values('0','10%','No damage')");
     query.exec("insert into result values('1','20%','Top damage')");
@@ -27,19 +27,19 @@ static bool createConnection()
 
 bool static createXml()
 {
-    QFile file("data.xml");//´´½¨Ò»¸öxmlÎÄ¼ş
+    QFile file("data.xml");//åˆ›å»ºä¸€ä¸ªxmlæ–‡ä»¶
     if(file.exists())
         return true;
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate))//ÒÔÖ»Ğ´·½Ê½´ò¿ª£¬ÇÒÇåÁãÒÔÇ°µÄĞÅÏ¢
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Truncate))//ä»¥åªå†™æ–¹å¼æ‰“å¼€ï¼Œä¸”æ¸…é›¶ä»¥å‰çš„ä¿¡æ¯
         return false;
-    QDomDocument doc;//ĞÂ½¨Ò»¸öQDomDocumentÀà¶ÔÏó£¬Ëü´ú±íÒ»¸öxmlÎÄ¼ş
-    QDomProcessingInstruction instruction;//Ìí¼Ó´¦ÀíÖ¸Áî
+    QDomDocument doc;//æ–°å»ºä¸€ä¸ªQDomDocumentç±»å¯¹è±¡ï¼Œå®ƒä»£è¡¨ä¸€ä¸ªxmlæ–‡ä»¶
+    QDomProcessingInstruction instruction;//æ·»åŠ å¤„ç†æŒ‡ä»¤
     instruction = doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\"");
-    doc.appendChild(instruction);//xmlÎÄ¼ş°æ±¾µÈĞÅÏ¢
-    QDomElement root = doc.createElement(QString("ÅĞ¶¨½á¹û£º"));
-    doc.appendChild(root);//Ôö¼Ó¸ùÄ¿Â¼
-    QTextStream out(&file);//Ö¸¶¨ÎÄ±¾Á÷
-    doc.save(out, 4);//½«xmlÎÄµµ±£´æµ½ÎÄ¼şdata.xmlÎÄ¼şÖĞ£¬4±íÊ¾×ÓÔªËØËõ½ø×Ö·ûÊı
+    doc.appendChild(instruction);//xmlæ–‡ä»¶ç‰ˆæœ¬ç­‰ä¿¡æ¯
+    QDomElement root = doc.createElement(QString("åˆ¤å®šç»“æœï¼š"));
+    doc.appendChild(root);//å¢åŠ æ ¹ç›®å½•
+    QTextStream out(&file);//æŒ‡å®šæ–‡æœ¬æµ
+    doc.save(out, 4);//å°†xmlæ–‡æ¡£ä¿å­˜åˆ°æ–‡ä»¶data.xmlæ–‡ä»¶ä¸­ï¼Œ4è¡¨ç¤ºå­å…ƒç´ ç¼©è¿›å­—ç¬¦æ•°
     file.close();
 
     return true;

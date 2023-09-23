@@ -1,7 +1,7 @@
 #ifndef FFT_H
 #define FFT_H
 
-//ÉùÃ÷FFTº¯Êý
+//å£°æ˜ŽFFTå‡½æ•°
 double FFT(double *RealArray,double *ImaArray,int n,int sign);
 
 #endif // FFT_H

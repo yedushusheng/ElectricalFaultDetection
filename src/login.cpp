@@ -11,7 +11,7 @@ login::login(QWidget *parent) :
     ui(new Ui::login)
 {
     ui->setupUi(this);
-    setWindowTitle(QObject::tr("ÓÃ»§µÇÂ½"));
+    setWindowTitle(QObject::tr("ç”¨æˆ·ç™»é™†"));
     ui->passwordEdit->setFocus();
     ui->loginButton->setDefault(true);
 }
@@ -25,7 +25,7 @@ void login::on_loginButton_clicked()
 {
     if(ui->passwordEdit->text().isEmpty())
     {
-        QMessageBox::information(this, QObject::tr("ÇëÊäÈëÃÜÂë"),QObject::tr("ÇëÊäÈëÃÜÂëÔÙµÇÂ¼"), QMessageBox::Ok);
+        QMessageBox::information(this, QObject::tr("è¯·è¾“å…¥å¯†ç "),QObject::tr("è¯·è¾“å…¥å¯†ç å†ç™»å½•"), QMessageBox::Ok);
         ui->passwordEdit->setFocus();
     }
     else
@@ -35,18 +35,18 @@ void login::on_loginButton_clicked()
         query.next();
         if(query.value(0).toString() == ui->passwordEdit->text())
         {
-            QDialog::accept();//½øÈë³ÌĞò½çÃæ
+            QDialog::accept();//è¿›å…¥ç¨‹åºç•Œé¢
         }
         else
         {
-           QMessageBox::warning(this, tr("ÃÜÂë´íÎó"), tr("ÇëÊäÈëÕıÈ·ÃÜÂëºóÔÙµÇÂ¼"),QMessageBox::Ok);
-           ui->passwordEdit->clear();
-           ui->passwordEdit->setFocus();//¸øÒ»¸öÊäÈë½¹µã
+            QMessageBox::warning(this, tr("å¯†ç é”™è¯¯"), tr("è¯·è¾“å…¥æ­£ç¡®å¯†ç åå†ç™»å½•"),QMessageBox::Ok);
+            ui->passwordEdit->clear();
+            ui->passwordEdit->setFocus();//ç»™ä¸€ä¸ªè¾“å…¥ç„¦ç‚¹
         }
-     }
+    }
 }
 
 void login::on_quitButton_clicked()
 {
-    QDialog::reject();//Òş²Ø¶Ô»°¿ò£¬·¢ËÍ¾Ü¾øĞÅºÅ
+    QDialog::reject();//éšè—å¯¹è¯æ¡†ï¼Œå‘é€æ‹’ç»ä¿¡å·
 }

@@ -24,19 +24,19 @@
 #include <QDataStream>
 #include <qmath.h>
 
-//Êı¾İ¿âÏà¹Ø
+//æ•°æ®åº“ç›¸å…³
 #include <QSqlDatabase>
 #include <QDebug>
 #include <QStringList>
 #include <QVariant>
 
-/*-----È«¾Ö±äÁ¿µÄ¶¨ÒåÇø-----*/
-double global_x[SumPot],global_y[SumPot];//Êµ¼Ê´«µİ¸ø»æÍ¼º¯ÊıµÄ±äÁ¿£¨²¨ĞÎÍ¼»æÖÆ£©
-double global_x1[SumPot],global_y1[SumPot];//ÆµÆ×ÇúÏß»æÖÆÊı¾İÔİ´æÇø
-//ÓĞ¹ØFFTµÄ±äÁ¿ÉùÃ÷
-double show1[SumPot]={0};   //Êµ²¿Êı×é
-double show2[SumPot]={0};   //Ğé²¿Êı×é
-double show3[SumPot]={0};   //ÓÃÓÚ×îºóÏÔÊ¾Ê¹ÓÃµÄÊı×é
+/*-----å…¨å±€å˜é‡çš„å®šä¹‰åŒº-----*/
+double global_x[SumPot],global_y[SumPot];//å®é™…ä¼ é€’ç»™ç»˜å›¾å‡½æ•°çš„å˜é‡ï¼ˆæ³¢å½¢å›¾ç»˜åˆ¶ï¼‰
+double global_x1[SumPot],global_y1[SumPot];//é¢‘è°±æ›²çº¿ç»˜åˆ¶æ•°æ®æš‚å­˜åŒº
+//æœ‰å…³FFTçš„å˜é‡å£°æ˜
+double show1[SumPot]={0};   //å®éƒ¨æ•°ç»„
+double show2[SumPot]={0};   //è™šéƒ¨æ•°ç»„
+double show3[SumPot]={0};   //ç”¨äºæœ€åæ˜¾ç¤ºä½¿ç”¨çš„æ•°ç»„
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -46,44 +46,44 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
-    setWindowTitle(QObject::tr("½ğÊô´ÉÖùÌ½ÉËÒÇ·ÖÎöÈí¼ş"));
+    setWindowTitle(QObject::tr("é‡‘å±ç“·æŸ±æ¢ä¼¤ä»ªåˆ†æè½¯ä»¶"));
     resize(1000,500);
-    //ÕâÊÇÎÒÃÇÈÏÎªµ÷Õû´óĞ¡£¬ÒªÏëÈÃ»æÍ¼ÇøºÍÖ÷´°ÌåÍ¬Ê±·½·¨ËõĞ¡£¬Ö»ĞèÒª½«¶şÕßÑ¡ÖĞÉèÎªË®Æ½»ò´¹Ö±²¼¾Ö¼´¿É
+    //è¿™æ˜¯æˆ‘ä»¬è®¤ä¸ºè°ƒæ•´å¤§å°ï¼Œè¦æƒ³è®©ç»˜å›¾åŒºå’Œä¸»çª—ä½“åŒæ—¶æ–¹æ³•ç¼©å°ï¼Œåªéœ€è¦å°†äºŒè€…é€‰ä¸­è®¾ä¸ºæ°´å¹³æˆ–å‚ç›´å¸ƒå±€å³å¯
 
-    //ĞÅºÅ-²ÛµÄÉùÃ÷
+    //ä¿¡å·-æ§½çš„å£°æ˜
     QObject::connect(ui->action_Qt,SIGNAL(triggered()),qApp,SLOT(aboutQt()));
     QObject::connect(ui->action_Website,SIGNAL(triggered()),this,SLOT(aboutWebsiteSlot()));
     QObject::connect(ui->action_about,SIGNAL(triggered()),this,SLOT(aboutSoftwareSlot()));
 
     ui->customPlot->clearGraphs();
-    //Ê¹ÓÃµÚÈı·½¿â½øĞĞ»æÍ¼
+    //ä½¿ç”¨ç¬¬ä¸‰æ–¹åº“è¿›è¡Œç»˜å›¾
     ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectAxes |
                                     QCP::iSelectLegend | QCP::iSelectPlottables);
 
 //    ui->customPlot->xAxis->setRange(0, SumPot);
-//    ui->customPlot->yAxis->setRange(-1, 1);//x¡¢yÏÔÊ¾ÇøÓò·¶Î§
+//    ui->customPlot->yAxis->setRange(-1, 1);//xã€yæ˜¾ç¤ºåŒºåŸŸèŒƒå›´
 //    ui->customPlot->axisRect()->setupFullAxesBox();
 
 //    ui->customPlot->plotLayout()->insertRow(0);
-//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("ÆµÆ×ÇúÏßÏÔÊ¾")));
+//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("é¢‘è°±æ›²çº¿æ˜¾ç¤º")));
 
-//    ui->customPlot->xAxis->setLabel(QObject::tr("x Öá"));
-//    ui->customPlot->yAxis->setLabel(QObject::tr("y Öá"));
+//    ui->customPlot->xAxis->setLabel(QObject::tr("x è½´"));
+//    ui->customPlot->yAxis->setLabel(QObject::tr("y è½´"));
 //    ui->customPlot->legend->setVisible(true);
 
     QFont legendFont = font();
-    legendFont.setPointSize(10);//ÓÒÉÏ½Ç±êÊ¶ÇúÏßÎÄ×ÖµÄ´óĞ¡
+    legendFont.setPointSize(10);//å³ä¸Šè§’æ ‡è¯†æ›²çº¿æ–‡å­—çš„å¤§å°
     ui->customPlot->legend->setFont(legendFont);
     ui->customPlot->legend->setSelectedFont(legendFont);
     ui->customPlot->legend->setSelectableParts(QCPLegend::spItems); // legend box shall not be selectable, only legend items
 
     ui->customPlot->plotLayout()->insertRow(0);
-    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("ÆµÆ×ÇúÏßÏÔÊ¾")));
+    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("é¢‘è°±æ›²çº¿æ˜¾ç¤º")));
     //addRandomGraph();
     //addRandomGraph();
     //addRandomGraph();
     //addRandomGraph();
-    //¸ù¾İÎÒÃÇÊµ¼ÊĞèÒªÈ·¶¨ÏÔÊ¾¼¸ÌõÇúÏß
+    //æ ¹æ®æˆ‘ä»¬å®é™…éœ€è¦ç¡®å®šæ˜¾ç¤ºå‡ æ¡æ›²çº¿
 
     // connect slot that ties some axis selections together (especially opposite axes):
     connect(ui->customPlot, SIGNAL(selectionChangedByUser()), this, SLOT(selectionChanged()));
@@ -108,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->customPlot, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequest(QPoint)));
 
     int plot_width = ui->customPlot->width();
-    int plot_heigh = ui->customPlot->height();//¶¨Òå»æÍ¼ÇøÓòµÄ¿í¶ÈºÍ¸ß¶È
+    int plot_heigh = ui->customPlot->height();//å®šä¹‰ç»˜å›¾åŒºåŸŸçš„å®½åº¦å’Œé«˜åº¦
 }
 
 MainWindow::~MainWindow()
@@ -118,31 +118,31 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_action_O_triggered()
 {
-    //ÎÄ¼şÑ¡Ôñ¶Ô»°¿ò
-    QString fileName = QFileDialog::getOpenFileName(this,QObject::tr("ÎÄ¼şÑ¡Ôñ¶Ô»°¿ò"),
-                                                          "F:",QObject::tr("²¨ĞÎÎÄ¼ş(*.wav)"));
-    //ÅĞ¶ÏÎÄ¼şÊÇ·ñÑ¡Ôñ£¬²¢¸ø³öÌáÊ¾ĞÅÏ¢¶Ô»°¿ò
-    if(fileName.length()==0)//»òÕßÊ¹ÓÃfileName.isEmpty()
+    //æ–‡ä»¶é€‰æ‹©å¯¹è¯æ¡†
+    QString fileName = QFileDialog::getOpenFileName(this,QObject::tr("æ–‡ä»¶é€‰æ‹©å¯¹è¯æ¡†"),
+                                                          "F:",QObject::tr("æ³¢å½¢æ–‡ä»¶(*.wav)"));
+    //åˆ¤æ–­æ–‡ä»¶æ˜¯å¦é€‰æ‹©ï¼Œå¹¶ç»™å‡ºæç¤ºä¿¡æ¯å¯¹è¯æ¡†
+    if(fileName.length()==0)//æˆ–è€…ä½¿ç”¨fileName.isEmpty()
     {
-        QMessageBox::information(NULL,QObject::tr("ÎÄ¼şÑ¡Ôñ"),
-                                 QObject::tr("ÇëÑ¡Ôñ²¨ĞÎÎÄ¼ş£¡"));
+        QMessageBox::information(NULL,QObject::tr("æ–‡ä»¶é€‰æ‹©"),
+                                 QObject::tr("è¯·é€‰æ‹©æ³¢å½¢æ–‡ä»¶ï¼"));
     }
     else
     {
-        QMessageBox::information(NULL,QObject::tr("ÎÄ¼şÑ¡Ôñ"),
-                                 QObject::tr("ÄãÒÑÑ¡Ôñ²¨ĞÎÎÄ¼ş£º")+fileName);
+        QMessageBox::information(NULL,QObject::tr("æ–‡ä»¶é€‰æ‹©"),
+                                 QObject::tr("ä½ å·²é€‰æ‹©æ³¢å½¢æ–‡ä»¶ï¼š")+fileName);
     }
     readFile(fileName);
 }
 
 bool MainWindow::readFile(QString fileName)
 {
-    //»ñÈ¡¶ÁÈ¡µÄÎÄ¼ş
+    //è·å–è¯»å–çš„æ–‡ä»¶
     QFile file(fileName);
     wav_struct WAV;
     if(!(file.open(QIODevice::ReadOnly)))
     {
-        //QMessageBox::information(this,QObject::tr("´ò¿ªÎÄ¼şÊ§°Ü£¡"),file.errorString());
+        //QMessageBox::information(this,QObject::tr("æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼"),file.errorString());
         return false;
     }
 
@@ -158,7 +158,7 @@ bool MainWindow::readFile(QString fileName)
     for(int i=0;i<WAV.data_size;i+=2)
     //for(int i=341;i<3414;i++)
     {
-        //ÓÒ±ßÎª´ó¶Ë
+        //å³è¾¹ä¸ºå¤§ç«¯
         unsigned long data_low = WAV.data[i];
         //qDebug()<<"\n data_low:"<<data_low;
         unsigned long data_high = WAV.data[i + 1];
@@ -166,13 +166,13 @@ bool MainWindow::readFile(QString fileName)
         //qDebug()<<"\n data_true:"<<data_true;
 
         long data_complement = 0;
-        //È¡´ó¶ËµÄ×î¸ßÎ»£¨·ûºÅÎ»£©
+        //å–å¤§ç«¯çš„æœ€é«˜ä½ï¼ˆç¬¦å·ä½ï¼‰
         int my_sign = (int)(data_high / 128);
         //printf("%d ", my_sign);
         if(my_sign == 1)
         {
             data_complement = data_true - 65536;
-            //Ê®½øÖÆ65536×ª»»ÎªÊ®Áù½øÖÆÊıÖµÎª10000£¬ÕâÀïµÄ×÷ÓÃ¾ÍÊÇÈ¥µô·ûºÅÎ»
+            //åè¿›åˆ¶65536è½¬æ¢ä¸ºåå…­è¿›åˆ¶æ•°å€¼ä¸º10000ï¼Œè¿™é‡Œçš„ä½œç”¨å°±æ˜¯å»æ‰ç¬¦å·ä½
         }
         else
         {
@@ -181,7 +181,7 @@ bool MainWindow::readFile(QString fileName)
         //printf("%d ", data_complement);
         //setprecision(4);
         double float_data = (double)(data_complement/(double)32768);
-        //ÕâÀïÊÇ16bit±íÊ¾Ò»¸öÑù±¾£¬Òò´Ë·ÖÄ¸Îª2^16=32768
+        //è¿™é‡Œæ˜¯16bitè¡¨ç¤ºä¸€ä¸ªæ ·æœ¬ï¼Œå› æ­¤åˆ†æ¯ä¸º2^16=32768
         //qDebug()<<"float_data"<<float_data*10;
         global_y[i] = float_data;
         show1[i] = float_data;
@@ -225,11 +225,11 @@ void MainWindow::on_action_Q_triggered()
 void MainWindow::closeEvent(QCloseEvent *event)
 {
 //    QMessageBox msgBox;
-//    msgBox.question(this,QObject::tr("ÌáÊ¾"),QObject::tr("È·¶¨ÍË³ö³ÌĞòÂğ?"),QMessageBox::Yes | QMessageBox::No,QMessageBox::Yes);
-//    //Ìí¼ÓÅĞ¶Ï´¦Àí³ÌĞò
+//    msgBox.question(this,QObject::tr("æç¤º"),QObject::tr("ç¡®å®šé€€å‡ºç¨‹åºå—?"),QMessageBox::Yes | QMessageBox::No,QMessageBox::Yes);
+//    //æ·»åŠ åˆ¤æ–­å¤„ç†ç¨‹åº
 }
 
-//µÚ¶ş¸ö²Ëµ¥À¸²Ûº¯Êı
+//ç¬¬äºŒä¸ªèœå•æ æ§½å‡½æ•°
 void MainWindow::on_action_zoom_in_triggered()
 {
 
@@ -250,7 +250,7 @@ void MainWindow::on_action_clear_triggered()
 
 }
 
-//µÚÈı¸ö²Ëµ¥À¸²Ûº¯Êı
+//ç¬¬ä¸‰ä¸ªèœå•æ æ§½å‡½æ•°
 void MainWindow::on_action_2D_triggered()
 {
 
@@ -266,25 +266,25 @@ void MainWindow::on_action_spec_triggered()
     ui->customPlot->clearGraphs();
 
     ui->customPlot->xAxis->setRange(1, 10);
-    ui->customPlot->yAxis->setRange(0, 1);//x¡¢yÏÔÊ¾ÇøÓò·¶Î§
+    ui->customPlot->yAxis->setRange(0, 1);//xã€yæ˜¾ç¤ºåŒºåŸŸèŒƒå›´
     ui->customPlot->axisRect()->setupFullAxesBox();
 
-    ui->customPlot->xAxis->setLabel(QObject::tr("ÆµÂÊ"));
-    ui->customPlot->yAxis->setLabel(QObject::tr("¹éÒ»»¯ÄÜÁ¿Æ×"));
+    ui->customPlot->xAxis->setLabel(QObject::tr("é¢‘ç‡"));
+    ui->customPlot->yAxis->setLabel(QObject::tr("å½’ä¸€åŒ–èƒ½é‡è°±"));
     ui->customPlot->legend->setVisible(true);
 
-    double show2[SumPot]={0};//Ğé²¿Êı×é
+    double show2[SumPot]={0};//è™šéƒ¨æ•°ç»„
     QVector<double> x(SumPot), y(SumPot);
 
     //FFT(show1,show2,n,sign);
     FFT(show1,show2,SumPot,1);
 
-    //-----¼ÆËã¹¦ÂÊÄÜÁ¿Æ×-----//
+    //-----è®¡ç®—åŠŸç‡èƒ½é‡è°±-----//
     double m=0,n=0;
     double max=1;
 
     for(int i=341;i<3414;i++)
-    //Ö»¼ÆËã1Kµ½10KÆµÆ×;16384*(1/48~10/48)
+    //åªè®¡ç®—1Kåˆ°10Ké¢‘è°±;16384*(1/48~10/48)
     {
         m=(show1[i]/16384)*(show1[i]/16384);
         n=(show2[i]/16384)*(show2[i]/16384);
@@ -294,11 +294,11 @@ void MainWindow::on_action_spec_triggered()
         show3[i-341]=(m+n)/16384;
         //sqrt(m+n)/;
 
-        //²âÊÔ½ÓÊÕµ½µÄÊı¾İ£¨ÕâÀïÊÇ×îÖÕÆµÆ×Í¼»ñÈ¡µÄÊı¾İ£©
+        //æµ‹è¯•æ¥æ”¶åˆ°çš„æ•°æ®ï¼ˆè¿™é‡Œæ˜¯æœ€ç»ˆé¢‘è°±å›¾è·å–çš„æ•°æ®ï¼‰
         qDebug()<<"show[3]:"<<show3[i-341];
         global_x1[i] = i;
         global_y1[i] = show3[i-341];
-        /*-----²âÊÔ½á¹û£ºÏÔÊ¾µÄÈÔÎ´Ô­²¨ĞÎ£¬Î´¾­FFT±ä»»-----*/
+        /*-----æµ‹è¯•ç»“æœï¼šæ˜¾ç¤ºçš„ä»æœªåŸæ³¢å½¢ï¼Œæœªç»FFTå˜æ¢-----*/
 
         //x[i] = global_x1[i];
         //y[i] = global_y1[i];
@@ -307,7 +307,7 @@ void MainWindow::on_action_spec_triggered()
         {
             max=show3[i-341];
         }
-        //µÃµ½×î´óÖµ
+        //å¾—åˆ°æœ€å¤§å€¼
     }
     addSpecGraph();
 
@@ -323,12 +323,12 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 }
 
-//µÚËÄ¸ö²Ëµ¥À¸²Ûº¯Êı
+//ç¬¬å››ä¸ªèœå•æ æ§½å‡½æ•°
 void MainWindow::aboutSoftwareSlot()
 {
     about *dialog = new about;
-    dialog->show();//unmodal dialog,¼´·ÇÄ£Ì¬¶Ô»°¿ò
-    //dialog->exec();//modal dialog,Ä£Ì¬¶Ô»°¿ò
+    dialog->show();//unmodal dialog,å³éæ¨¡æ€å¯¹è¯æ¡†
+    //dialog->exec();//modal dialog,æ¨¡æ€å¯¹è¯æ¡†
 }
 
 void MainWindow::aboutWebsiteSlot()
@@ -336,13 +336,13 @@ void MainWindow::aboutWebsiteSlot()
     QDesktopServices::openUrl(QUrl("http://www.qt.io/"));
 }
 
-//µÚÈı·½¿â»æÍ¼º¯Êı
+//ç¬¬ä¸‰æ–¹åº“ç»˜å›¾å‡½æ•°
 void MainWindow::titleDoubleClick(QMouseEvent* event, QCPPlotTitle* title)
 {
     Q_UNUSED(event)
     // Set the plot title by double clicking on it
     bool ok;
-    QString newTitle = QInputDialog::getText(this, QObject::tr("¸ü¸Ä±êÌâ"), QObject::tr("ĞÂ±êÌâ£º"), QLineEdit::Normal, title->text(), &ok);
+    QString newTitle = QInputDialog::getText(this, QObject::tr("æ›´æ”¹æ ‡é¢˜"), QObject::tr("æ–°æ ‡é¢˜ï¼š"), QLineEdit::Normal, title->text(), &ok);
     if (ok)
     {
       title->setText(newTitle);
@@ -356,7 +356,7 @@ void MainWindow::axisLabelDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart par
   if (part == QCPAxis::spAxisLabel) // only react when the actual axis label is clicked, not tick label or axis backbone
   {
     bool ok;
-    QString newLabel = QInputDialog::getText(this, QObject::tr("ĞŞ¸Ä×ø±êÖá"), QObject::tr("ĞÂ×ø±êÃû³Æ:"), QLineEdit::Normal, axis->label(), &ok);
+    QString newLabel = QInputDialog::getText(this, QObject::tr("ä¿®æ”¹åæ ‡è½´"), QObject::tr("æ–°åæ ‡åç§°:"), QLineEdit::Normal, axis->label(), &ok);
     if (ok)
     {
       axis->setLabel(newLabel);
@@ -373,7 +373,7 @@ void MainWindow::legendDoubleClick(QCPLegend *legend, QCPAbstractLegendItem *ite
   {
     QCPPlottableLegendItem *plItem = qobject_cast<QCPPlottableLegendItem*>(item);
     bool ok;
-    QString newName = QInputDialog::getText(this, QObject::tr("ĞŞ¸ÄÇúÏßÃû³Æ"), QObject::tr("ĞÂÇúÏßÃû³Æ:"), QLineEdit::Normal, plItem->plottable()->name(), &ok);
+    QString newName = QInputDialog::getText(this, QObject::tr("ä¿®æ”¹æ›²çº¿åç§°"), QObject::tr("æ–°æ›²çº¿åç§°:"), QLineEdit::Normal, plItem->plottable()->name(), &ok);
     if (ok)
     {
       plItem->plottable()->setName(newName);
@@ -460,14 +460,14 @@ void MainWindow::addWaveGraph()
 //    }
 
     ui->customPlot->xAxis->setRange(0, SumPot);
-    ui->customPlot->yAxis->setRange(-1, 1);//x¡¢yÏÔÊ¾ÇøÓò·¶Î§
+    ui->customPlot->yAxis->setRange(-1, 1);//xã€yæ˜¾ç¤ºåŒºåŸŸèŒƒå›´
     ui->customPlot->axisRect()->setupFullAxesBox();
 
 //    ui->customPlot->plotLayout()->insertRow(0);
-//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("ÆµÆ×ÇúÏßÏÔÊ¾")));
+//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("é¢‘è°±æ›²çº¿æ˜¾ç¤º")));
 
-    ui->customPlot->xAxis->setLabel(QObject::tr("x Öá"));
-    ui->customPlot->yAxis->setLabel(QObject::tr("y Öá"));
+    ui->customPlot->xAxis->setLabel(QObject::tr("x è½´"));
+    ui->customPlot->yAxis->setLabel(QObject::tr("y è½´"));
     ui->customPlot->legend->setVisible(true);
 
     int n = SumPot;// number of points in graph
@@ -482,8 +482,8 @@ void MainWindow::addWaveGraph()
     }
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setName(QString(QObject::tr("ÇúÏß %1").arg(ui->customPlot->graphCount()-1)));//ÇúÏßÃû³Æ
-    ui->customPlot->graph()->setData(x, y);//ÉèÖÃ×ø±êÖµ
+    ui->customPlot->graph()->setName(QString(QObject::tr("æ›²çº¿ %1").arg(ui->customPlot->graphCount()-1)));//æ›²çº¿åç§°
+    ui->customPlot->graph()->setData(x, y);//è®¾ç½®åæ ‡å€¼
 
     QPen graphPen;
     graphPen.setColor(QColor(255,0,0));
@@ -497,14 +497,14 @@ void MainWindow::addSpecGraph()
     ui->customPlot->clearGraphs();
 
     ui->customPlot->xAxis->setRange(341, 3414);
-    ui->customPlot->yAxis->setRange(0, 1);//x¡¢yÏÔÊ¾ÇøÓò·¶Î§
+    ui->customPlot->yAxis->setRange(0, 1);//xã€yæ˜¾ç¤ºåŒºåŸŸèŒƒå›´
     ui->customPlot->axisRect()->setupFullAxesBox();
 
 //    ui->customPlot->plotLayout()->insertRow(0);
-//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("ÆµÆ×ÇúÏßÏÔÊ¾")));
+//    ui->customPlot->plotLayout()->addElement(0, 0, new QCPPlotTitle(ui->customPlot, QObject::tr("é¢‘è°±æ›²çº¿æ˜¾ç¤º")));
 
-    ui->customPlot->xAxis->setLabel(QObject::tr("ÆµÂÊ"));
-    ui->customPlot->yAxis->setLabel(QObject::tr("¹éÒ»»¯¹¦ÂÊÄÜÁ¿Æ×"));
+    ui->customPlot->xAxis->setLabel(QObject::tr("é¢‘ç‡"));
+    ui->customPlot->yAxis->setLabel(QObject::tr("å½’ä¸€åŒ–åŠŸç‡èƒ½é‡è°±"));
     ui->customPlot->legend->setVisible(true);
 
     int n = SumPot;// number of points in graph
@@ -514,13 +514,13 @@ void MainWindow::addSpecGraph()
         x[i] = i;
         //qDebug()<<"\n x[i]:"<<x[i];
         //y[i] = global_y1[i];
-        y[i] = global_y1[i]*10000000000;//·ùÖµÌ«Ğ¡ÏÔÊ¾²»³öÀ´£¬ĞèÒªÊÊµ±µ÷Õû
+        y[i] = global_y1[i]*10000000000;//å¹…å€¼å¤ªå°æ˜¾ç¤ºä¸å‡ºæ¥ï¼Œéœ€è¦é€‚å½“è°ƒæ•´
         //qDebug()<<"\n y[i]:"<<y[i];
     }
 
     ui->customPlot->addGraph();
-    ui->customPlot->graph()->setName(QString(QObject::tr("ÇúÏß %1").arg(ui->customPlot->graphCount()-1)));//ÇúÏßÃû³Æ
-    ui->customPlot->graph()->setData(x, y);//ÉèÖÃ×ø±êÖµ
+    ui->customPlot->graph()->setName(QString(QObject::tr("æ›²çº¿ %1").arg(ui->customPlot->graphCount()-1)));//æ›²çº¿åç§°
+    ui->customPlot->graph()->setData(x, y);//è®¾ç½®åæ ‡å€¼
 
     QPen graphPen;
     graphPen.setColor(QColor(255,0,0));
@@ -551,18 +551,18 @@ void MainWindow::contextMenuRequest(QPoint pos)
 
   if (ui->customPlot->legend->selectTest(pos, false) >= 0) // context menu on legend requested
   {
-    menu->addAction(QObject::tr("×óÉÏÏÔÊ¾"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignLeft));
-    menu->addAction(QObject::tr("¾ÓÖĞÏÔÊ¾"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignHCenter));
-    menu->addAction(QObject::tr("ÓÒÉÏÏÔÊ¾"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignRight));
-    menu->addAction(QObject::tr("ÓÒÏÂÏÔÊ¾"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignBottom|Qt::AlignRight));
-    menu->addAction(QObject::tr("×óÏÂÏÔÊ¾"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignBottom|Qt::AlignLeft));
+    menu->addAction(QObject::tr("å·¦ä¸Šæ˜¾ç¤º"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignLeft));
+    menu->addAction(QObject::tr("å±…ä¸­æ˜¾ç¤º"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignHCenter));
+    menu->addAction(QObject::tr("å³ä¸Šæ˜¾ç¤º"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignTop|Qt::AlignRight));
+    menu->addAction(QObject::tr("å³ä¸‹æ˜¾ç¤º"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignBottom|Qt::AlignRight));
+    menu->addAction(QObject::tr("å·¦ä¸‹æ˜¾ç¤º"), this, SLOT(moveLegend()))->setData((int)(Qt::AlignBottom|Qt::AlignLeft));
   } else  // general context menu on graphs requested
   {
     //menu->addAction("Add random graph", this, SLOT(addRandomGraph()));
     if (ui->customPlot->selectedGraphs().size() > 0)
-      menu->addAction(QObject::tr("É¾³ıËùÑ¡ÇúÏß"), this, SLOT(removeSelectedGraph()));
+      menu->addAction(QObject::tr("åˆ é™¤æ‰€é€‰æ›²çº¿"), this, SLOT(removeSelectedGraph()));
     if (ui->customPlot->graphCount() > 0)
-      menu->addAction(QObject::tr("É¾³ıËùÓĞÇúÏß"), this, SLOT(removeAllGraphs()));
+      menu->addAction(QObject::tr("åˆ é™¤æ‰€æœ‰æ›²çº¿"), this, SLOT(removeAllGraphs()));
   }
 
   menu->popup(ui->customPlot->mapToGlobal(pos));
@@ -584,20 +584,20 @@ void MainWindow::moveLegend()
 
 void MainWindow::graphClicked(QCPAbstractPlottable *plottable)
 {
-  ui->statusBar->showMessage(QString(QObject::tr("ÒÑÑ¡ÔñÇúÏß '%1'.").arg(plottable->name())), 1000);
+  ui->statusBar->showMessage(QString(QObject::tr("å·²é€‰æ‹©æ›²çº¿ '%1'.").arg(plottable->name())), 1000);
 }
 
 int MainWindow::on_action_result_triggered()
 {
     diagram *analyse_diagram = new diagram;
     analyse_diagram->show();
-    // ´´½¨Êı¾İ¿âÁ¬½Ó
+    // åˆ›å»ºæ•°æ®åº“è¿æ¥
     if (!createConnection())
         return 1;
 
-    //Ê¹ÓÃQSqlQuery²éÑ¯Á¬½Ó1µÄÕûÕÅ±í£¬ÏÈÒªÊ¹ÓÃÁ¬½ÓÃû»ñÈ¡¸ÃÁ¬½Ó
+    //ä½¿ç”¨QSqlQueryæŸ¥è¯¢è¿æ¥1çš„æ•´å¼ è¡¨ï¼Œå…ˆè¦ä½¿ç”¨è¿æ¥åè·å–è¯¥è¿æ¥
     QSqlDatabase db = QSqlDatabase::database("connection1");
-    // Ê¹ÓÃQSqlQuery²éÑ¯ÕûÕÅ±í
+    // ä½¿ç”¨QSqlQueryæŸ¥è¯¢æ•´å¼ è¡¨
     QSqlQuery query(db);
     query.exec("select * from result");
     while(query.next())
@@ -606,8 +606,8 @@ int MainWindow::on_action_result_triggered()
     }
 }
 
-//ÔÚÌí¼Ó¸ÃÀàÖ®Ç°ĞèÒªÔÚmainwindow.hÖĞÒıÈëĞÅºÅ²ÛÓ³Éä¹ØÏµ£¬ÕâÀïÒıÈëlogin.h¼´¿É
-//·ñÔò²»»áÊ¶±ğ³ö¸ÃÀà£¬³öÏÖÎ´¶¨Òå±êÊ¶·ûµÄ´íÎó
+//åœ¨æ·»åŠ è¯¥ç±»ä¹‹å‰éœ€è¦åœ¨mainwindow.hä¸­å¼•å…¥ä¿¡å·æ§½æ˜ å°„å…³ç³»ï¼Œè¿™é‡Œå¼•å…¥login.hå³å¯
+//å¦åˆ™ä¸ä¼šè¯†åˆ«å‡ºè¯¥ç±»ï¼Œå‡ºç°æœªå®šä¹‰æ ‡è¯†ç¬¦çš„é”™è¯¯
 void MainWindow::on_action_login_triggered()
 {
     login *customer = new login;

@@ -8,7 +8,7 @@ about::about(QWidget *parent) :
     ui(new Ui::about)
 {
     ui->setupUi(this);
-    setWindowTitle(QObject::tr("¹ØÓÚÈí¼ş"));
+    setWindowTitle(QObject::tr("å…³äºè½¯ä»¶"));
 }
 
 about::~about()

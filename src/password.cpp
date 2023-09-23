@@ -7,7 +7,7 @@ password::password(QWidget *parent) :
     ui(new Ui::password)
 {
     ui->setupUi(this);
-    setWindowTitle(QObject::tr("ÐÞ¸ÄµÇÂ¼ÃÜÂë"));
+    setWindowTitle(QObject::tr("ä¿®æ”¹ç™»å½•å¯†ç "));
 }
 
 password::~password()
@@ -21,10 +21,10 @@ void password::on_okButton_clicked()
     query.exec("select pwd from password");
     query.next();
     if(ui->oldPasswordLineEdit->text().isEmpty())
-        QMessageBox::warning(this, QObject::tr("ÇëÊäÈëÃÜÂë"), QObject::tr("ÇëÊäÈë¾ÉÃÜÂëºÍÐÂÃÜÂë"), QMessageBox::Ok);
+        QMessageBox::warning(this, QObject::tr("è¯·è¾“å…¥å¯†ç "), QObject::tr("è¯·è¾“å…¥æ—§å¯†ç å’Œæ–°å¯†ç "), QMessageBox::Ok);
     else if(ui->oldPasswordLineEdit->text() != query.value(0).toString())
     {
-        QMessageBox::warning(this, QObject::tr("ÃÜÂë´íÎó"), QObject::tr("ÊäÈëµÄ¾ÉÃÜÂë´íÎó"), QMessageBox::Ok);
+        QMessageBox::warning(this, QObject::tr("å¯†ç é”™è¯¯"), QObject::tr("è¾“å…¥çš„æ—§å¯†ç é”™è¯¯"), QMessageBox::Ok);
         ui->oldPasswordLineEdit->setFocus();
     }
     else
@@ -32,18 +32,18 @@ void password::on_okButton_clicked()
         if(ui->newPasswordLineEdit->text() == ui->surePasswordlineEdit->text())
         {
             QString newPassword = ui->newPasswordLineEdit->text();
-            query.exec(QString("update password set pwd=%1").arg(newPassword));//¸üÐÂÃÜÂë
-            QMessageBox::information(this, QObject::tr("ÐÞ¸ÄÃÜÂë"), QObject::tr("ÐÞ¸ÄÃÜÂë³É¹¦£¡"), QMessageBox::Ok);
+            query.exec(QString("update password set pwd=%1").arg(newPassword));//æ›´æ–°å¯†ç 
+            QMessageBox::information(this, QObject::tr("ä¿®æ”¹å¯†ç "), QObject::tr("ä¿®æ”¹å¯†ç æˆåŠŸï¼"), QMessageBox::Ok);
         }
         else
-            QMessageBox::warning(this, QObject::tr("ÐÞ¸ÄÃÜÂëÊ§°Ü"), QObject::tr("ÐÂÃÜÂëÁ½´ÎÊäÈë²»Ò»ÖÂ£¡"), QMessageBox::Ok);
+            QMessageBox::warning(this, QObject::tr("ä¿®æ”¹å¯†ç å¤±è´¥"), QObject::tr("æ–°å¯†ç ä¸¤æ¬¡è¾“å…¥ä¸ä¸€è‡´ï¼"), QMessageBox::Ok);
     }
 }
 
 void password::on_cancelButton_clicked()
 {
     ui->oldPasswordLineEdit->clear();
-        ui->oldPasswordLineEdit->setFocus();//°ÑÊäÈë½¹µã·ÅÔÚ¾ÉÃÜÂë´¦£¬·½±ãÖØÐÂÊäÈë
-        ui->newPasswordLineEdit->clear();
-        ui->surePasswordlineEdit->clear();
+    ui->oldPasswordLineEdit->setFocus();//æŠŠè¾“å…¥ç„¦ç‚¹æ”¾åœ¨æ—§å¯†ç å¤„ï¼Œæ–¹ä¾¿é‡æ–°è¾“å…¥
+    ui->newPasswordLineEdit->clear();
+    ui->surePasswordlineEdit->clear();
 }

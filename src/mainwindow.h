@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QUrl>
-#include <QDesktopServices>//ÓÃÓÚ·ÃÎÊ×ÀÃæ·şÎñµÄÀà
+#include <QDesktopServices>//ç”¨äºè®¿é—®æ¡Œé¢æœåŠ¡çš„ç±»
 #include "about.h"
-#include <QCloseEvent>//µ±³ÌĞòĞèÒª¹Ø±ÕÊ±Ëù´¦ÀíµÄÄÚÈİ£¬ËùÓĞµÄÊÂ¼ş¶¼ÊÇÊÜ±£»¤µÄ³ÉÔ±º¯Êı£¬¼´protected
+#include <QCloseEvent>//å½“ç¨‹åºéœ€è¦å…³é—­æ—¶æ‰€å¤„ç†çš„å†…å®¹ï¼Œæ‰€æœ‰çš„äº‹ä»¶éƒ½æ˜¯å—ä¿æŠ¤çš„æˆå‘˜å‡½æ•°ï¼Œå³protected
 
 #include "qcustomplot.h"
 #include <QInputDialog>
@@ -38,8 +38,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    bool readFile(QString fileName);    //¶ÁÈ¡ÎÄ¼şÄÚÈİ
-    int QByteArrayToInt(QByteArray bytes);  //QByteArray×ªint
+    bool readFile(QString fileName);    //è¯»å–æ–‡ä»¶å†…å®¹
+    int QByteArrayToInt(QByteArray bytes);  //QByteArrayè½¬int
     const char* getString(const QByteArray ba);
 
 protected:
@@ -47,29 +47,29 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 private slots:
-    //µÚÒ»¸ö²Ëµ¥À¸²Ûº¯Êı¶¨Òå
+    //ç¬¬ä¸€ä¸ªèœå•æ æ§½å‡½æ•°å®šä¹‰
     void on_action_O_triggered();
     void on_action_A_triggered();
     void on_action_P_triggered();
     void on_action_Q_triggered();
 
-    //µÚ¶ş¸ö²Ëµ¥À¸²Ûº¯Êı¶¨Òå
+    //ç¬¬äºŒä¸ªèœå•æ æ§½å‡½æ•°å®šä¹‰
     void on_action_wave_triggered();
     void on_action_spec_triggered();
     void on_action_2D_triggered();
     void on_action_3D_triggered();
 
-    //µÚÈı¸ö²Ëµ¥À¸²Ûº¯Êı¶¨Òå
+    //ç¬¬ä¸‰ä¸ªèœå•æ æ§½å‡½æ•°å®šä¹‰
     void on_action_zoom_in_triggered();
     void on_action_zoom_out_triggered();
     void on_action_rotate_triggered();
     void on_action_clear_triggered();
 
-    //µÚËÄ¸ö²Ëµ¥À¸²Ûº¯Êı¶¨Òå
-    void aboutSoftwareSlot();//µ¯³ö¡°¹ØÓÚÈí¼ş¡±µÄ×Ó¶Ô»°¿ò
-    void aboutWebsiteSlot();//´ò¿ªÒ»¸öÍøÖ·£¬Ê¹ÓÃµÄÊÇÄ¬ÈÏµÄä¯ÀÀÆ÷
+    //ç¬¬å››ä¸ªèœå•æ æ§½å‡½æ•°å®šä¹‰
+    void aboutSoftwareSlot();//å¼¹å‡ºâ€œå…³äºè½¯ä»¶â€çš„å­å¯¹è¯æ¡†
+    void aboutWebsiteSlot();//æ‰“å¼€ä¸€ä¸ªç½‘å€ï¼Œä½¿ç”¨çš„æ˜¯é»˜è®¤çš„æµè§ˆå™¨
 
-    //µÚÈı·½¿âµÄÏà¹Ø¶¨Òå
+    //ç¬¬ä¸‰æ–¹åº“çš„ç›¸å…³å®šä¹‰
     void titleDoubleClick(QMouseEvent *event, QCPPlotTitle *title);
     void axisLabelDoubleClick(QCPAxis* axis, QCPAxis::SelectablePart part);
     void legendDoubleClick(QCPLegend* legend, QCPAbstractLegendItem* item);
@@ -93,16 +93,16 @@ private:
 
     struct wav_struct
     {
-        unsigned long file_size;        //ÎÄ¼ş´óĞ¡
-        unsigned short channel;            //Í¨µÀÊı
-        unsigned long frequency;        //²ÉÑùÆµÂÊ
-        unsigned long Bps;                //ByteÂÊ
-        unsigned short sample_num_bit;    //Ò»¸öÑù±¾µÄÎ»Êı
-        int data_size;        //Êı¾İ´óĞ¡
-        unsigned char *data;            //ÒôÆµÊı¾İ ,ÕâÀïÒª¶¨ÒåÊ²Ã´¾Í¿´Ñù±¾Î»ÊıÁË£¬ÎÒÕâÀïÖ»ÊÇµ¥´¿µÄ¸´ÖÆÊı¾İ
+        unsigned long file_size;        //æ–‡ä»¶å¤§å°
+        unsigned short channel;            //é€šé“æ•°
+        unsigned long frequency;        //é‡‡æ ·é¢‘ç‡
+        unsigned long Bps;                //Byteç‡
+        unsigned short sample_num_bit;    //ä¸€ä¸ªæ ·æœ¬çš„ä½æ•°
+        int data_size;        //æ•°æ®å¤§å°
+        unsigned char *data;            //éŸ³é¢‘æ•°æ® ,è¿™é‡Œè¦å®šä¹‰ä»€ä¹ˆå°±çœ‹æ ·æœ¬ä½æ•°äº†ï¼Œæˆ‘è¿™é‡Œåªæ˜¯å•çº¯çš„å¤åˆ¶æ•°æ®
     };
 
-    QVector<QPointF>  curveMap;//´æ´¢ÇúÏßÍ¼ÉÏµÄ¶¨µã
+    QVector<QPointF>  curveMap;//å­˜å‚¨æ›²çº¿å›¾ä¸Šçš„å®šç‚¹
 };
 
 #endif // MAINWINDOW_H

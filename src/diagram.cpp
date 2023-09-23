@@ -8,7 +8,7 @@ diagram::diagram(QWidget *parent) :
     ui(new Ui::diagram)
 {
     ui->setupUi(this);
-    setWindowTitle(QObject::tr("˛¨ĐÎˇÖÎö˝ášűĎÔĘž"));//增加中文字符支持
+    setWindowTitle(QObject::tr("频谱分析"));//
 }
 
 diagram::~diagram()
