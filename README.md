@@ -1,11 +1,22 @@
-# MetalDetector
-基于Qt的嵌入式瓷支柱绝缘子故障检测软件
+# Embedded Fault Detection Software for Porcelain Insulator Based on Qt
 
-基本功能：
-1、可以实现采集wav文件的在线分析；
-2、获取频谱分布图，并根据频谱特性判断绝缘子是否损坏。
+This is an embedded software application developed using Qt for fault detection in porcelain insulators.
 
-待完善功能：
-1、需要人为判断绝缘子是否损坏以及损坏程度；
-2、FFT算法速度较慢，采用改进型分裂基比较好；
-3、增加界面的功能完善，尤其是数据加密上。
+## Basic Features
+
+1. **Online Analysis of `.wav` Files**  
+   The software supports real-time analysis of audio data collected from `.wav` files.
+
+2. **Frequency Spectrum Distribution & Fault Detection**  
+   It generates the frequency spectrum distribution and determines whether the insulator is damaged based on frequency characteristics.
+
+## Features to be Improved
+
+1. **Manual Damage Assessment**  
+   Currently, the determination of whether the insulator is damaged and the severity of the damage relies on human judgment.
+
+2. **FFT Algorithm Performance**  
+   The current FFT algorithm is relatively slow. It is recommended to use an improved split-radix FFT for better performance.
+
+3. **UI and Data Security Enhancements**  
+   The user interface needs further improvements, particularly in data encryption and overall functionality.
